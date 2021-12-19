@@ -4,12 +4,12 @@ const inputTodo = document.getElementById('todo-text')
 
 const addTodo = event => {
   event.preventDefault();
-  const liEl = document.createElement('li');
-  liEl.append(inputTodo.value);
-  todoUl.append(liEl);
-
-  // Todo проверка, что в поле ввода что-то введено
-
+  if (inputTodo.value) {
+    const liEl = document.createElement('li');
+    liEl.append(inputTodo.value);
+    todoUl.append(liEl);
+    inputTodo.value = '';
+  }
 };
 
 todoForm.addEventListener('submit', event => addTodo(event));
