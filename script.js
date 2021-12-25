@@ -3,6 +3,21 @@ const ul = document.getElementById('todo-items');
 const input = document.getElementById('todo-text');
 
 
+const listItemHandler = event => {
+    const target = event.target;
+    const listElement = event.currentTarget;
+
+    switch (target?.dataset?.action) {
+      case 'remove':
+        listElement.remove();
+        break;
+
+      case 'complete':
+        listElement.classList.add('complete');
+        break;
+    }
+};
+
 const addTodo = (todoText) => {
   const listItem = document.createElement('li');
   listItem.append(todoText);
@@ -12,18 +27,17 @@ const addTodo = (todoText) => {
   removeButton.append('x');
   listItem.append(removeButton);
 
-  ul.append(listItem);
-  listItem.addEventListener('click', event => {
-    const target = event.target;
-    const listElement = event.currentTarget;
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.dataset.action = 'complete';
+  checkbox.value = 'complete'
+  listItem.prepend(checkbox);
 
-    if (target?.dataset?.action === 'remove') {
-      listElement.remove();
-    }
-  });
+  ul.append(listItem);
+  listItem.addEventListener('click', event => listItemHandler(event));
 };
 
-const addTodoHandler = event => {
+const formHandler = event => {
   event.preventDefault();
   const inputValue = input.value;
   if (!inputValue) return;
@@ -32,4 +46,4 @@ const addTodoHandler = event => {
   form.reset();
 };
 
-form.addEventListener('submit', event => addTodoHandler(event));
+form.addEventListener('submit', event => formHandler(event));

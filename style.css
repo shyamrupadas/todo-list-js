@@ -9,3 +9,7 @@ button {
 li {
   margin-top: 5px;
 }
+
+.complete {
+  text-decoration: line-through;
+}
