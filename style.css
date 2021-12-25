@@ -6,10 +6,17 @@ button {
   margin-left: 5px;
 }
 
+ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
 li {
   margin-top: 5px;
+  list-style-type: none;
 }
 
 .complete {
   text-decoration: line-through;
+  color: darkgray;
 }

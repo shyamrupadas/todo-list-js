@@ -13,7 +13,7 @@ const listItemHandler = event => {
         break;
 
       case 'complete':
-        listElement.classList.add('complete');
+        listElement.classList.toggle('complete');
         break;
     }
 };
