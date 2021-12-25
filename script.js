@@ -2,21 +2,25 @@ const form = document.getElementById('add-todo');
 const ul = document.getElementById('todo-items');
 const input = document.getElementById('todo-text');
 
-const deleteTodo = todoEL => {
-// Todo удаление todo
-};
 
 const addTodo = (todoText) => {
-  const liEl = document.createElement('li');
-  liEl.append(todoText);
+  const listItem = document.createElement('li');
+  listItem.append(todoText);
 
+  const removeButton = document.createElement('button');
+  removeButton.dataset.action = 'remove';
+  removeButton.append('x');
+  listItem.append(removeButton);
 
-  const deleteButtonEl = document.createElement('button');
-  deleteButtonEl.append('x');
-  liEl.append(deleteButtonEl);
+  ul.append(listItem);
+  listItem.addEventListener('click', event => {
+    const target = event.target;
+    const listElement = event.currentTarget;
 
-  ul.append(liEl);
-  deleteButtonEl.addEventListener('click', event => deleteTodo(event));
+    if (target?.dataset?.action === 'remove') {
+      listElement.remove();
+    }
+  });
 };
 
 const addTodoHandler = event => {
@@ -25,7 +29,7 @@ const addTodoHandler = event => {
   if (!inputValue) return;
 
   addTodo(inputValue);
-  input.value = '';
+  form.reset();
 };
 
 form.addEventListener('submit', event => addTodoHandler(event));
